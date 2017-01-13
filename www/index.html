@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>NetWork Test</title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/servicio.js"></script>
+
+</head>
+
+<body ng-app="starter">
+
+    <ion-pane>
+
+        <ion-header-bar class="bar-dark">
+            <h1 class="title">Relaciones en SQLite</h1>
+        </ion-header-bar>
+
+        <ion-content ng-controller="networkCtrl">
+
+            <ul class="list list-inset">
+
+                <div class="row">
+                    <div class="col">
+                        <button class="button button-block button-assertive" ng-click="dbProcesos.dbCreate()">Crear</button>
+                    </div>
+                    <div class="col">
+                        <button class="button button-block button-energized" ng-click="dbProcesos.tablaInsert()">Insertar</button>
+                    </div>
+                </div>
+
+                <li class="item item-divider item-borderless">Lista de Personas</li>
+                <div class="item item-borderless row" ng-repeat="persona in informacionUsuarios.personas">
+                    <li class="item item-borderless col"><b>{{$index + 1}}</b>-<b>Nombre:</b> {{persona.nombre}}</li>
+                    <li class="item item-borderless col"><b>Apellido:</b> {{persona.apellido}}</li>
+                </div>
+
+                <label class="item item-input">
+                     <input type="text" placeholder="Cedula" ng-model="numeroCedula">
+                </label>
+                <button class="button button-block button-royal" ng-click="dbProcesos.consultarTodo()">Consulta Foranea</button>
+
+                <li class="item item-divider item-borderless">Lista de Telefonos</li>
+                <div class="item item-borderless row" ng-repeat="telefono in informacionUsuarios.telefonos">
+                    <li class="item item-borderless col"><b>{{$index + 1}}</b>-<b>Telefono:</b> {{telefono.numero}}</li>
+                </div>
+
+            </ul>
+
+        </ion-content>
+
+    </ion-pane>
+
+</body>
+
+</html>
